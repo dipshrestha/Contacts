@@ -1,0 +1,55 @@
+<h3>Search</h3>
+<form class="form-inline" role="form">
+    <div class="form-group">
+        <div class="input-group">
+            <label class="sr-only" for="firstName">First Name</label>
+            <input class="form-control" id="firstName" placeholder="First Name" ng-model="filter.firstName">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="lastName">Last Name</label>
+        <input type="text" class="form-control" id="lastName" placeholder="Last Name" ng-model="filter.lastName">
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="lastName">Telephone</label>
+        <input type="text" class="form-control" id="telephone" placeholder="Telephone" ng-model="filter.telephone">
+    </div>
+
+    <button type="button" class="btn btn-default"ng-click="reset()">Clear</button>
+</form>
+
+
+<br/>
+<table class="table table-hover">
+    <tr>
+        <th><a href="" ng-click="sort('sno')">S.No.
+            <span id="sortBy-sno" class="glyphicon glyphicon-sort-by-attributes-"></span>
+        </a></th>
+        <th><a href="" ng-click="sort('firstName')">First Name
+            <span id="sortBy-firstName" class="glyphicon"></span>
+        </a></th>
+        <th><a href="" ng-click="sort('lastName')">Last Name
+            <span id="sortBy-lastName" class="glyphicon"></span>
+            </a></th>
+        <th><a href="" ng-click="sort('address')">Address
+            <span id="sortBy-address" class="glyphicon"></span>
+            </a></th>
+        <th><a href="" ng-click="sort('telephone')">Telephone
+            <span id="sortBy-telephone" class="glyphicon"></span>
+        </a></th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <tr ng-repeat="contact in contactList | filter: { firstName: filter.firstName, lastName: filter.lastName, telephone: filter.telephone} | orderBy: orderByField:isOrderReverse ">
+        <td>{{contact.sno}}</td>
+        <td>{{contact.firstName}}</td>
+        <td>{{contact.lastName}}</td>
+        <td>{{contact.address}}</td>
+        <td>{{contact.telephone}}</td>
+        <td><a href="#/Edit/{{contact.sno}}" class="btn btn-primary btn-sm" role="button">Edit</a></td>
+        <td><a href="" ng-click="deleteContact(contact.sno)" class="btn btn-danger btn-sm" role="button">X</a></td>
+    </tr>
+</table>
+
+<br/>
+<a href="#/Add" class="btn btn-primary btn-lg active" role="button">Add Contact</a>
